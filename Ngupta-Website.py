@@ -2,14 +2,51 @@ import streamlit as st
 from datetime import datetime, date
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="Nehil Gupta | Portfolio", page_icon="📈", layout="wide")
+st.set_page_config(
+    page_title="Nehil Gupta | Portfolio", 
+    page_icon="📈", 
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-# --- PHOTO FILENAME (Ensure this file is uploaded to GitHub with your code) ---
+# --- PHOTO FILENAME ---
 PHOTO_FILENAME = "Nehil Profile Photo.jpg"
 
-# --- SHARED STYLING ---
+# --- MOBILE NAVIGATION HINT & SHARED STYLING ---
 st.markdown("""
     <style>
+    /* Hide Streamlit Branding */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    
+    /* MOBILE NAVIGATION HINT: Only visible on small screens */
+    @media only screen and (max-width: 768px) {
+        .mobile-hint {
+            position: fixed;
+            top: 12px;
+            left: 60px;
+            background-color: #1f77b4;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 999999;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(31, 119, 180, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(31, 119, 180, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(31, 119, 180, 0); }
+        }
+    }
+    @media only screen and (min-width: 769px) {
+        .mobile-hint { display: none; }
+    }
+
+    /* Original Professional Styling */
     .stApp { background-color: #fcfcfc; }
     .main-header { color: #1f77b4; font-size: 2.8rem; font-weight: bold; margin-bottom: 0; }
     .sub-header { color: #444; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; }
@@ -19,6 +56,8 @@ st.markdown("""
     .project-card-content { background-color: #f0f8ff; padding: 15px; border-radius: 10px; border-left: 5px solid #1f77b4; }
     .contact-text { font-size: 1.2rem; margin-bottom: 10px; }
     </style>
+    
+    <div class="mobile-hint">⬅️ Tap Arrow for Menu</div>
     """, unsafe_allow_html=True)
 
 # --- PAGE: HOME ---
