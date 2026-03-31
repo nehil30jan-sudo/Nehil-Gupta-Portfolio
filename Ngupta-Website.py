@@ -12,7 +12,7 @@ st.set_page_config(
 # --- PHOTO FILENAME ---
 PHOTO_FILENAME = "Nehil Profile Photo.jpg"
 
-# --- 2. ADVANCED SAFARI-COMPATIBLE CSS ---
+# --- 2. ADVANCED MOBILE CSS & STYLING ---
 st.markdown("""
     <style>
     /* Hide Streamlit Branding */
@@ -20,62 +20,40 @@ st.markdown("""
     footer {visibility: hidden;}
     header {visibility: hidden;}
     
-    /* UNIVERSAL SIDEBAR TOGGLE FIX (FOR SAFARI MOBILE) */
-    /* This targets the button and ensures it is visible and black */
-    button[data-testid="stHeaderActionElements"] {
-        display: none !important;
-    }
-    
-    /* Target the specific Sidebar Toggle Button */
-    .st-emotion-cache-15ec60f, [data-testid="stSidebarCollapseButton"] {
-        background-color: white !important;
+    /* CHANGE SIDEBAR ARROW TO BLACK */
+    button[kind="headerNoContext"] {
         color: black !important;
-        border: 2px solid black !important;
+        background-color: rgba(0,0,0,0.05) !important;
         border-radius: 50% !important;
+        width: 45px !important;
+        height: 45px !important;
         position: fixed !important;
         top: 15px !important;
         left: 15px !important;
-        z-index: 9999999 !important;
-        width: 45px !important;
-        height: 45px !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.2) !important;
+        z-index: 999999 !important;
     }
 
-    /* Force the Icon inside the button to be Solid Black */
-    [data-testid="stSidebarCollapseButton"] svg {
-        fill: black !important;
-        color: black !important;
-        width: 25px !important;
-        height: 25px !important;
-    }
-
-    /* Mobile Hint for Safari Users */
+    /* Floating Mobile Menu Hint (Only shows on mobile) */
     @media only screen and (max-width: 768px) {
         .mobile-hint {
             position: fixed;
             bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
+            right: 20px;
             background-color: black;
             color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 13px;
             font-weight: bold;
-            box-shadow: 0px 4px 15px rgba(0,0,0,0.4);
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
             z-index: 1000;
-            text-align: center;
-            width: 80%;
         }
     }
     @media only screen and (min-width: 769px) {
         .mobile-hint { display: none; }
     }
 
-    /* Section Styling */
+    /* Original Styles */
     .stApp { background-color: #fcfcfc; }
     .main-header { color: #1f77b4; font-size: 2.8rem; font-weight: bold; margin-bottom: 0; }
     .sub-header { color: #444; font-size: 1.6rem; margin-top: 0; margin-bottom: 20px; }
@@ -83,9 +61,10 @@ st.markdown("""
     .job-date { color: #888; font-size: 0.95rem; font-weight: bold; display: block; margin-bottom: 10px;}
     .edu-card { background-color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);}
     .project-card-content { background-color: #f0f8ff; padding: 15px; border-radius: 10px; border-left: 5px solid #1f77b4; }
+    .contact-text { font-size: 1.2rem; margin-bottom: 10px; }
     </style>
     
-    <div class="mobile-hint">⚙️ Tap Black Circle (Top-Left) for Menu</div>
+    <div class="mobile-hint">⬅️ Tap Top-Left Arrow for Menu</div>
     """, unsafe_allow_html=True)
 
 # --- PAGE: HOME ---
@@ -317,3 +296,13 @@ pg = st.navigation([
     st.Page(projects_page, title="Projects", icon="📂"),
     st.Page(education_page, title="Education", icon="🎓"),
     st.Page(achievements_page, title="Achievements", icon="🏆"),
+    st.Page(contact_page, title="Contact Now", icon="📧"),
+])
+
+# --- SIDEBAR ---
+st.sidebar.markdown("### Quick Connect")
+st.sidebar.write("✉️ [nehil30jan@gmail.com](mailto:nehil30jan@gmail.com)")
+st.sidebar.write("📞 +91 9821783999")
+st.sidebar.caption("Built with Streamlit 2026")
+
+pg.run()
